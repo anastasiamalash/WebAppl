@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body class="text-center">
+<header th:insert="blocks/header_logout :: header_logout"></header>
+
+<div class="container mt-5">
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">Admin Account</h1>
+        <p class="lead mt-5">
+            <a href="/Admin/add1/" class="btn btn-lg btn-secondary">Add Client</a>
+        </p>
+        <p class="lead">
+            <a href="/Admin/add/" class="btn btn-lg btn-secondary">Edit/Delete Client</a>
+        </p>
+        <p class="lead">
+            <a href="/Admin/write/" class="btn btn-lg btn-secondary">To give a book</a>
+        </p>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body class="text-center">
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h4 class="my-0 mr-md-auto font-weight-normal">Reader.io</h4>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/User">Back</a>
+    </nav>
+</div>
+
+<div class="container mt-5">
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">Book Search...</h1>
+        <div th:each="el : ${books}" class="alert alert-info mt-2">
+            <h3 th:text="${el.Book}"/>
+            <p th:text="${el.Author}"/>
+        </div>
+    </main>
+</div>
+</body>
+</html>
