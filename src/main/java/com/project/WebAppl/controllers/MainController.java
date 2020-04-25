@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,10 +24,12 @@ public class MainController {
         model.addAttribute("title", "Reader.io");
         return "mainpage";
     }
+
     @GetMapping("/Registration")
     public String reg(Model model) {
         return "registration";
     }
+
     @GetMapping("/Logon")
     public String log(Model model) {
         return "logon";
@@ -37,15 +40,6 @@ public class MainController {
         return "user";
     }
 
-    @Autowired
-    private BookRepository bookRepository;
-    @GetMapping("/User/search")
-    public String user1(Model model) {
-        Iterable<Book> books = bookRepository.findAll();
-        model.addAttribute("books", books);
-        return "booksearch";
-    }
-
     @GetMapping("/Admin")
     public String admin(Model model) {
         return "admin";
@@ -53,6 +47,7 @@ public class MainController {
 
     @Autowired
     private ClientRepository clientRepository;
+
     @GetMapping("/Admin/add/")
     public String admin1(Model model) {
         Iterable<Client> clients = clientRepository.findAll();
@@ -65,11 +60,11 @@ public class MainController {
         return "addclient1";
     }
 
-    @PostMapping("/Admin/add/")
-    public String adminclientadd(@RequestParam Long id, @RequestParam String FIO, @RequestParam String Email, @RequestParam String Password, @RequestParam int ClientsCode, @RequestParam int Admin, Model model) {
-        Client client = new Client(id, FIO, Email, Password, ClientsCode, Admin);
+    @PostMapping("/Admin/add1/")
+    public String adminclientadd(@RequestParam String FIO, @RequestParam String Email, @RequestParam String Password, @RequestParam int ClientsCode, @RequestParam int Admin, Model model) {
+        Client client = new Client(FIO, Email, Password, ClientsCode, Admin);
         clientRepository.save(client);
-        return "redirect:/Admin/add";
+        return "redirect:/Admin/add/";
     }
 
     @GetMapping("/Admin/write/")
@@ -108,10 +103,36 @@ public class MainController {
     }
 
     @PostMapping("/Admin/add/{id}/delete")
-    public String admindel(@PathVariable(value = "id") long id,  Model model) {
+    public String admindel(@PathVariable(value = "id") long id, Model model) {
         Client client = clientRepository.findById(id).orElseThrow();
         clientRepository.delete(client);
         return "redirect:/Admin/add/";
     }
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @GetMapping("/User/search")
+    public String user1(Model model) {
+        Iterable<Book> books = bookRepository.findAll();
+        model.addAttribute("books", books);
+        return "booksearch";
+    }
+
+    @PostMapping("/User/search")
+    public String search(@RequestParam String Book, @RequestParam String Author, Model model) {
+        Book book = new Book(Book, Author);
+        bookRepository.save(book);
+        Iterable<Book> books = bookRepository.findAll();
+        model.addAttribute("books", books);
+        return "booksearch";
+    }
+
+    /*@PostMapping("filter")
+    public String filter(@RequestParam String filter, Model model) {
+        List<Book> books = bookRepository.findByBook(filter);
+        model.addAttribute("books", books);
+        return "booksearch";
+    }*/
 
 }

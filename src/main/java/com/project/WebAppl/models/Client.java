@@ -65,8 +65,8 @@ public class Client {
     public Client() {
     }
 
-    public Client(Long Id, String FIO, String Email, String Password, int ClientsCode, int Admin) {
-        this.Id = Id;
+    public Client(String FIO, String Email, String Password, int ClientsCode, int Admin) {
+//        this.Id = Id;
         this.FIO = FIO;
         this.Email = Email;
         this.Password = Password;

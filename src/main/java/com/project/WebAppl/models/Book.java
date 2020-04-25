@@ -14,6 +14,14 @@ public class Book {
     private String Book, Author;
     private int BookCode;
 
+    public Book() {
+    }
+
+    public Book(String Book, String Author) {
+        this.Book = Book;
+        this.Author = Author;
+    }
+
     public Long getId() {
         return id;
     }
