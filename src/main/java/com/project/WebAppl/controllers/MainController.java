@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -25,15 +24,10 @@ public class MainController {
         return "mainpage";
     }
 
-    @GetMapping("/Registration")
-    public String reg(Model model) {
-        return "registration";
-    }
-
-    @GetMapping("/Logon")
+    /*@GetMapping("/Logon")
     public String log(Model model) {
-        return "logon";
-    }
+        return "login";
+    }*/
 
     @GetMapping("/User")
     public String user(Model model) {
@@ -65,11 +59,6 @@ public class MainController {
         Client client = new Client(FIO, Email, Password, ClientsCode, Admin);
         clientRepository.save(client);
         return "redirect:/Admin/add/";
-    }
-
-    @GetMapping("/Admin/write/")
-    public String admin3(Model model) {
-        return "writebook";
     }
 
     @GetMapping("/Admin/add/{id}")
@@ -128,10 +117,16 @@ public class MainController {
         return "booksearch";
     }
 
-    /*@PostMapping("filter")
-    public String filter(@RequestParam String filter, Model model) {
-        List<Book> books = bookRepository.findByBook(filter);
+    /*@GetMapping("/User/search")
+    public String filter(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+        Iterable<Book> books = bookRepository.findAll();
+        if (filter != null && !filter.isEmpty()){
+            books = bookRepository.findByBook(filter);
+        } else {
+            books = bookRepository.findAll();
+        }
         model.addAttribute("books", books);
+        model.addAttribute("filter", filter);
         return "booksearch";
     }*/
 

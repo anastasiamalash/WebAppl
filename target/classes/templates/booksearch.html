@@ -16,10 +16,10 @@
     <div class="container mt-5">
         <main role="main" class="inner cover">
             <h1 class="cover-heading">Book Search...</h1>
-            <form method="post" action="filter">
-                <input type="text" name="filter">
-                <button type="submit"> FIND </button>
-            </form>
+                <form method="get" action="/User/search" >
+                    <input type="text" name="filter">
+                    <button type="submit"> FIND </button>
+                </form>
             <div th:each="el : ${books}" class="alert alert-info mt-2">
                 <h3 th:text="${el.book}"/>
                 <p th:text="${el.author}"/>
